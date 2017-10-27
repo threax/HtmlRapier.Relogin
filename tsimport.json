@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "htmlrapier.relogin.*": [
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
