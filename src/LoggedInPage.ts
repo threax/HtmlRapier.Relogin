@@ -1,6 +1,6 @@
-﻿///<amd-module name="htmlrapier.relogin.logged-in-page"/>
+﻿///<amd-module name="hr.relogin.logged-in-page"/>
 
-import * as loginPopup from 'htmlrapier.relogin.LoginPopup';
+import * as loginPopup from 'hr.relogin.LoginPopup';
 
 var data: loginPopup.ILoginMessage = {
         type: loginPopup.MessageType,
