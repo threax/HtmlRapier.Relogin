@@ -1,7 +1,7 @@
 ﻿import * as controller from 'hr.controller';
 import { Fetcher, RequestInfo, Response } from 'hr.fetcher';
 import * as ep from 'hr.externalpromise';
-import { AccessTokenManager } from 'hr.accesstokens';
+import { AccessTokenFetcher } from 'hr.accesstokens';
 
 export class LoginPopupOptions{
     private _relogPage;
@@ -33,7 +33,7 @@ export class LoginPopup {
 
         this.loginFrame = <HTMLIFrameElement>bindings.getHandle("loginFrame");
 
-        if (AccessTokenManager.isInstance(fetcher)) {
+        if (AccessTokenFetcher.isInstance(fetcher)) {
             fetcher.onNeedLogin.add(f => this.open(f));
 
             window.addEventListener("message", e => {
@@ -46,7 +46,7 @@ export class LoginPopup {
         };
     }
 
-    public open(accessTokenManager: AccessTokenManager): Promise<boolean> {
+    public open(accessTokenManager: AccessTokenFetcher): Promise<boolean> {
         this.dialog.on();
         this.currentPromise = new ep.ExternalPromise<boolean>();
         this.setIframeHeight();

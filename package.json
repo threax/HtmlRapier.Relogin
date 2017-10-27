@@ -1,7 +1,7 @@
 {
   "name": "htmlrapier.relogin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
-    "htmlrapier": ">=12.0.0"
+    "htmlrapier": ">=14.0.0"
   }
 }
