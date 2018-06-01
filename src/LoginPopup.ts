@@ -33,12 +33,16 @@ export class LoginPopup {
 
         this.loginFrame = <HTMLIFrameElement>bindings.getHandle("loginFrame");
 
-        if (AccessTokenFetcher.isInstance(fetcher)) {
-            fetcher.onNeedLogin.add(f => this.open(f));
+        var currentFetcher = fetcher;
+        while (currentFetcher) {
+            if (AccessTokenFetcher.isInstance(currentFetcher)) {
+                currentFetcher.onNeedLogin.add(f => this.showLogin());
 
-            window.addEventListener("message", e => {
-                this.handleMessage(e);
-            });
+                window.addEventListener("message", e => {
+                    this.handleMessage(e);
+                });
+            }
+            currentFetcher = (<any>currentFetcher).next;
         }
 
         this.resizeEvent = e => {
@@ -46,7 +50,7 @@ export class LoginPopup {
         };
     }
 
-    public open(accessTokenManager: AccessTokenFetcher): Promise<boolean> {
+    public showLogin(): Promise<boolean> {
         this.dialog.on();
         this.currentPromise = new ep.ExternalPromise<boolean>();
         this.setIframeHeight();

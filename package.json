@@ -1,6 +1,6 @@
 {
   "name": "htmlrapier.relogin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "dependencies": {
     "htmlrapier": ">=14.0.0"
   }
