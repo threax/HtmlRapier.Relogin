@@ -37,13 +37,13 @@ export class LoginPopup {
         while (currentFetcher) {
             if (AccessTokenFetcher.isInstance(currentFetcher)) {
                 currentFetcher.onNeedLogin.add(f => this.showLogin());
-
-                window.addEventListener("message", e => {
-                    this.handleMessage(e);
-                });
             }
             currentFetcher = (<any>currentFetcher).next;
         }
+
+        window.addEventListener("message", e => {
+            this.handleMessage(e);
+        });
 
         this.resizeEvent = e => {
             this.setIframeHeight();
