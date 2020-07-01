@@ -1,7 +1,11 @@
 {
   "name": "htmlrapier.relogin",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "dependencies": {
     "htmlrapier": ">=14.0.0"
-  }
+  },
+  "files": [
+    "src/**/*",
+    "tsimport.json"
+  ]
 }
