@@ -1,7 +1,7 @@
-﻿import * as controller from 'hr.controller';
-import { Fetcher, RequestInfo, Response } from 'hr.fetcher';
-import * as ep from 'hr.externalpromise';
-import { AccessTokenFetcher } from 'hr.accesstokens';
+﻿import * as controller from 'htmlrapier/src/controller';
+import { Fetcher, RequestInfo, Response } from 'htmlrapier/src/fetcher';
+import * as ep from 'htmlrapier/src/externalpromise';
+import { AccessTokenFetcher } from 'htmlrapier/src/accesstokens';
 
 export class LoginPopupOptions{
     private _relogPage;
