@@ -1,11 +1,4 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "hr.relogin.*": [
-        "src/*"
-      ]
-    }
-  },
   "include": [
     "src/**/*.ts"
   ]
