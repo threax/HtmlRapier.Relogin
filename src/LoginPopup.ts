@@ -3,14 +3,14 @@ import { Fetcher, RequestInfo, Response } from 'hr.fetcher';
 import * as ep from 'hr.externalpromise';
 import { AccessTokenFetcher } from 'hr.accesstokens';
 
-export class LoginPopupOptions{
+export class LoginPopupOptions {
     private _relogPage;
 
-    constructor(relogPage: string){
+    constructor(relogPage: string) {
         this._relogPage = relogPage;
     }
 
-    public get relogPage(){
+    public get relogPage() {
         return this._relogPage;
     }
 }
@@ -59,14 +59,18 @@ export class LoginPopup {
         return this.currentPromise.Promise;
     }
 
-    private handleMessage(e: MessageEvent): void{
-        var message: ILoginMessage = JSON.parse(e.data);
-        if(message.type === MessageType && message.success){
+    private handleMessage(e: MessageEvent): void {
+        let message: ILoginMessage = null;
+        try {
+            message = JSON.parse(e.data);
+        }
+        catch (err) { }
+        if (message && message.type === MessageType && message.success) {
             this.dialog.off();
         }
     }
 
-    private setIframeHeight(): void{
+    private setIframeHeight(): void {
         this.loginFrame.style.height = (window.innerHeight - 240) + "px";
     }
 
@@ -89,7 +93,7 @@ export class LoginPopup {
 
 export const MessageType: string = "LoginPageMessage";
 
-export interface ILoginMessage{
+export interface ILoginMessage {
     type: string;
     success: boolean;
 }
