@@ -2,6 +2,7 @@
 import { Fetcher, RequestInfo, Response } from 'hr.fetcher';
 import * as ep from 'hr.externalpromise';
 import { AccessTokenFetcher } from 'hr.accesstokens';
+import * as safepost from 'hr.safepostmessage';
 
 export class LoginPopupOptions {
     private _relogPage;
@@ -17,7 +18,7 @@ export class LoginPopupOptions {
 
 export class LoginPopup {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, LoginPopupOptions, Fetcher];
+        return [controller.BindingCollection, LoginPopupOptions, Fetcher, safepost.PostMessageValidator];
     }
 
     private dialog: controller.OnOffToggle;
@@ -25,7 +26,7 @@ export class LoginPopup {
     private loginFrame: HTMLIFrameElement;
     private resizeEvent;
 
-    constructor(bindings: controller.BindingCollection, private options: LoginPopupOptions, fetcher: Fetcher) {
+    constructor(bindings: controller.BindingCollection, private options: LoginPopupOptions, fetcher: Fetcher, private messageValidator: safepost.PostMessageValidator) {
         this.dialog = bindings.getToggle("dialog");
         this.dialog.offEvent.add(t => {
             this.closed();
@@ -60,13 +61,11 @@ export class LoginPopup {
     }
 
     private handleMessage(e: MessageEvent): void {
-        let message: ILoginMessage = null;
-        try {
-            message = JSON.parse(e.data);
-        }
-        catch (err) { }
-        if (message && message.type === MessageType && message.success) {
-            this.dialog.off();
+        if (this.messageValidator.isValid(e)) {
+            let message: ILoginMessage = e.data;
+            if (message && message.type === MessageType && message.success) {
+                this.dialog.off();
+            }
         }
     }
 

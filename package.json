@@ -1,8 +1,8 @@
 {
   "name": "htmlrapier.relogin",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "dependencies": {
-    "htmlrapier": ">=14.0.0"
+    "htmlrapier": ">=23.1.0"
   },
   "files": [
     "src/**/*",
