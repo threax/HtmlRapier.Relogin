@@ -1,7 +1,7 @@
 ﻿import * as controller from 'hr.controller';
 import { Fetcher } from 'hr.fetcher';
 import * as ep from 'hr.externalpromise';
-import { AccessTokenFetcher } from 'hr.accesstoken.fetcher';
+import { TokenManager } from 'hr.accesstoken.manager';
 import * as safepost from 'hr.safepostmessage';
 
 export class LoginPopupOptions {
@@ -18,7 +18,7 @@ export class LoginPopupOptions {
 
 export class LoginPopup {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, LoginPopupOptions, Fetcher, safepost.PostMessageValidator];
+        return [controller.BindingCollection, LoginPopupOptions, Fetcher, safepost.PostMessageValidator, TokenManager];
     }
 
     private dialog: controller.OnOffToggle;
@@ -26,7 +26,7 @@ export class LoginPopup {
     private loginFrame: HTMLIFrameElement;
     private resizeEvent;
 
-    constructor(bindings: controller.BindingCollection, private options: LoginPopupOptions, fetcher: Fetcher, private messageValidator: safepost.PostMessageValidator) {
+    constructor(bindings: controller.BindingCollection, private options: LoginPopupOptions, fetcher: Fetcher, private messageValidator: safepost.PostMessageValidator, private tokenManager: TokenManager) {
         this.dialog = bindings.getToggle("dialog");
         this.dialog.offEvent.add(t => {
             this.closed();
@@ -34,13 +34,7 @@ export class LoginPopup {
 
         this.loginFrame = <HTMLIFrameElement>bindings.getHandle("loginFrame");
 
-        var currentFetcher = fetcher;
-        while (currentFetcher) {
-            if (AccessTokenFetcher.isInstance(currentFetcher)) {
-                currentFetcher.onNeedLogin.add(f => this.showLogin());
-            }
-            currentFetcher = (<any>currentFetcher).next;
-        }
+        tokenManager.onNeedLogin.add(f => this.showLogin());
 
         window.addEventListener("message", e => {
             this.handleMessage(e);
