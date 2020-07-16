@@ -1,7 +1,7 @@
 ﻿import * as controller from 'hr.controller';
 import { Fetcher } from 'hr.fetcher';
 import * as ep from 'hr.externalpromise';
-import { AccessTokenFetcher } from 'hr.accesstoken.accesstokens';
+import { AccessTokenFetcher } from 'hr.accesstoken.fetcher';
 import * as safepost from 'hr.safepostmessage';
 
 export class LoginPopupOptions {
