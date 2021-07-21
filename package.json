@@ -1,9 +1,9 @@
 {
   "name": "htmlrapier.relogin",
-  "version": "4.0.0",
+  "version": "5.0.0-pre.0",
   "dependencies": {
-    "htmlrapier": ">=24.0.0",
-    "htmlrapier.accesstoken": ">=1.0.0"
+    "htmlrapier": ">=25.0.0-pre.0",
+    "htmlrapier.accesstoken": ">=2.0.0-pre.0"
   },
   "files": [
     "src/**/*",

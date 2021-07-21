@@ -1,6 +1,6 @@
-﻿import * as loginPopup from 'hr.relogin.LoginPopup';
-import * as safepost from 'hr.safepostmessage';
-import * as controller from 'hr.controller';
+﻿import * as loginPopup from './LoginPopup';
+import * as safepost from 'htmlrapier/src/safepostmessage';
+import * as controller from 'htmlrapier/src/controller';
 
 var data: loginPopup.ILoginMessage = {
     type: loginPopup.MessageType,
