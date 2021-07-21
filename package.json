@@ -1,6 +1,6 @@
 {
   "name": "htmlrapier.relogin",
-  "version": "5.0.0-pre.0",
+  "version": "5.0.0-pre.1",
   "dependencies": {
     "htmlrapier": ">=25.0.0-pre.0",
     "htmlrapier.accesstoken": ">=2.0.0-pre.0"
